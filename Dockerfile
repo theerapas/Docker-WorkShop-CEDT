@@ -4,8 +4,8 @@
 # Builder stage — installs production dependencies only, on a fresh Node base.
 # =============================================================================
 
-# TODO(step-4a): set the builder base image as node:20.11-slim and name the stage "builder".
-FROM node:20.11-slim AS builder
+# TODO(step-4a): set the builder base image as node:20.11-slim and name the stage "builder". -> use node 24 cuz Trivy scan failed if node 20
+FROM node:24-bookworm-slim AS builder
 #   Do NOT use `node:latest` — we want reproducible builds across the cohort.
 
 WORKDIR /app
@@ -22,7 +22,7 @@ COPY app/ ./
 # =============================================================================
 
 # TODO(step-4d): set the runtime base image (same tag as step-4a for consistency).
-FROM node:20.11-slim
+FROM node:24-bookworm-slim
 
 WORKDIR /app
 
